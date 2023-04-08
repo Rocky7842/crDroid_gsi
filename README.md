@@ -12,21 +12,22 @@ As a first step, you'll have to create and enter a folder with the appropriate n
 To do that, run these commands:
 
 ```bash
-   mkdir crDroid
-   cd crDroid
+mkdir crDroid
+cd crDroid
 ```
 
 ### To initialize your local repository, run this command:
 
 ```bash
-   repo init -u https://github.com/crdroidandroid/android.git -b 13.0 --git-lfs
+repo init -u https://github.com/crdroidandroid/android.git -b 13.0 --git-lfs
 ```
  
 
 ### Clone the Manifest to add necessary dependencies for gsi:
- 
-    git clone https://github.com/Rocky7842/crDroid_gsi.git .repo/local_manifests  -b 13
-  
+
+```
+git clone https://github.com/Rocky7842/crDroid_gsi.git .repo/local_manifests  -b 13
+```
 
 
 ### Afterwards, sync the source by running this command:
@@ -41,17 +42,17 @@ repo sync --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$
 Copy the patches folder to rom folder and in rom folder
 
 ```
-   bash patches/apply-patches.sh .
+bash patches/apply-patches.sh .
 ```
 
 ## Generating Rom Makefile
 
  In rom folder,
  
- ```
-    cd device/phh/treble
-    bash generate.sh crDroid
- ```
+```
+cd device/phh/treble
+bash generate.sh crDroid
+```
 
 ### Turn on caching to speed up build
 
@@ -67,12 +68,12 @@ export CCACHE_MAXSIZE=50G # 50 GB
 
 In rom folder,
 
- ```
- . build/envsetup.sh
- ccache -M 50G -F 0
- lunch treble_arm64_bgN-userdebug 
- make systemimage -j$(nproc --all)
- ```
+```
+. build/envsetup.sh
+ccache -M 50G -F 0
+lunch treble_arm64_bgN-userdebug 
+make systemimage -j$(nproc --all)
+```
 
 
 ## Compress
@@ -81,10 +82,10 @@ After compilation,
 If you want to compress the build.
 In rom folder,
 
-   ```
-        cd out/target/product/tdgsi_arm64_ab
-        xz -z -k system.img 
-   ```
+```
+cd out/target/product/tdgsi_arm64_ab
+xz -z -k system.img 
+```
 
 
 ## Troubleshoot
